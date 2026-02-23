@@ -1,33 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joana M. Bernardino — IT Instructor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-<html>
-  
-<h1> Joana M. Bernardino </h1>
-<h1> IT Instructor / Professional</h1>
+    :root {
+      --bg: #0a0e1a;
+      --surface: #111827;
+      --card: #141c2e;
+      --accent: #00d4ff;
+      --accent2: #7c3aed;
+      --text: #e2e8f0;
+      --muted: #64748b;
+      --border: rgba(255,255,255,0.07);
+    }
 
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* Animated mesh background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: 
+        radial-gradient(ellipse 80% 60% at 10% 0%, rgba(124,58,237,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 90% 100%, rgba(0,212,255,0.12) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ─── HERO ─── */
+    header {
+      padding: 5rem 0 3rem;
+      position: relative;
+    }
+
+    .tag-line {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(0,212,255,0.08);
+      border: 1px solid rgba(0,212,255,0.2);
+      padding: 0.35rem 0.9rem;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .tag-line::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.7); }
+    }
+
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    h1 .highlight {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      margin-top: 1rem;
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 520px;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    /* ─── PHOTOS STRIP ─── */
+    .photos {
+      display: flex;
+      gap: 1rem;
+      margin: 2.5rem 0;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
+    .photo-frame {
+      flex: 1;
+      aspect-ratio: 4/5;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--card);
+      position: relative;
+    }
+
+    .photo-frame:first-child {
+      flex: 0 0 120px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+    }
+
+    .photo-frame img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: grayscale(20%);
+      transition: filter 0.3s, transform 0.4s;
+    }
+
+    .photo-frame:hover img {
+      filter: grayscale(0%);
+      transform: scale(1.04);
+    }
+
+    .photo-label {
+      position: absolute;
+      bottom: 0.5rem; left: 0.6rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(4px);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+    }
+
+    /* ─── ABOUT ─── */
+    .section {
+      padding: 2.5rem 0;
+      animation: fadeUp 0.6s 0.35s ease both;
+    }
+
+    .section-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 1rem;
+    }
+
+    .about-text {
+      font-size: 1rem;
+      color: #94a3b8;
+      max-width: 660px;
+    }
+
+    .about-text p + p { margin-top: 0.9rem; }
+
+    /* ─── SKILLS ─── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 1rem;
+      margin-top: 1.2rem;
+    }
+
+    .skill-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.2rem 1.3rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s, border-color 0.2s;
+      cursor: default;
+    }
+
+    .skill-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(0,212,255,0.25);
+    }
+
+    .skill-card:hover::before { transform: scaleX(1); }
+
+    .skill-icon {
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .skill-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    /* ─── EDUCATION TIMELINE ─── */
+    .edu-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      padding-left: 1rem;
+      border-left: 2px solid var(--border);
+      margin-top: 1.2rem;
+    }
+
+    .edu-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.2rem;
+      padding-bottom: 1.8rem;
+      position: relative;
+    }
+
+    .edu-item:last-child { padding-bottom: 0; }
+
+    .edu-dot {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+      flex-shrink: 0;
+      margin-top: 0.3rem;
+      margin-left: calc(-1rem - 7px);
+    }
+
+    .edu-dot--muted {
+      background: var(--muted);
+      box-shadow: none;
+    }
+
+    .edu-body { flex: 1; }
+
+    .edu-year {
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-family: 'Syne', sans-serif;
+    }
+
+    .edu-dot--muted ~ .edu-body .edu-year { color: var(--muted); }
+
+    .edu-degree {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text);
+      margin-top: 0.2rem;
+    }
+
+    .edu-school {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-top: 0.1rem;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      padding: 3rem 0 2rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .status-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.78rem;
+      color: #4ade80;
+    }
+
+    .status-badge::before {
+      content: '';
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #4ade80;
+      animation: pulse 2s infinite;
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── DIVIDER ─── */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 0.5rem 0;
+    }
+  </style>
+</head>
 <body>
-<p> I graduated in 2013 from Western Institute of Technology and I work as IT laboratory custodian and technician in the said institution for a year after. My professor as well as my department head encourage me to teach and share my knowledge of computers. I’m teaching senior high school, and college, especially in bachelor of science in information technology. I never expected that I will become an educator. </p>
- <img src="2x2.jpg" alt="">
-<img src="f2f.jpeg" alt="">
-<img src="online.JPG" alt="">
+  <div class="container">
 
+    <header>
+      <div class="tag-line">IT Instructor & Professional</div>
+      <h1>Joana M.<br><span class="highlight">Bernardino</span></h1>
+      <p class="subtitle">Educator in Computer Science &amp; Information Technology · Western Institute of Technology</p>
+    </header>
 
+    <!-- PHOTOS -->
+    <div class="photos">
+      <div class="photo-frame">
+        <img src="2x2.jpg" alt="Joana Bernardino portrait">
+      </div>
+      <div class="photo-frame">
+        <img src="f2f.jpeg" alt="Face-to-face class">
+        <span class="photo-label">F2F Class</span>
+      </div>
+      <div class="photo-frame">
+        <img src="online.JPG" alt="Online class">
+        <span class="photo-label">Online Class</span>
+      </div>
+    </div>
 
-<p>
-In today’s world, because of the phenomenon of degree inflation, having a bachelor’s degree is 
-still valued, but no longer seen as a mark of exceptional academic competence. Many people believe in a competitive workforce. With a growing demand for information technology experts, having an employee with a master's degree in IT can give additional points to an institution.
+    <!-- ABOUT -->
+    <section class="section">
+      <p class="section-label">About</p>
+      <div class="about-text">
+        <p>I graduated in 2013 from Western Institute of Technology and worked as an IT laboratory custodian and technician for a year after graduation. Encouraged by my professors and department head to share my knowledge, I stepped into teaching — a path I never originally envisioned for myself.</p>
+        <p>Today I teach senior high school and college students, particularly those pursuing a Bachelor of Science in Information Technology. In 2024, I completed my <strong style="color: var(--text);">Master of Science in Information Technology</strong> at Saint Louis University, Tuguegarao — a milestone that deepens my ability to lead and innovate in the classroom.</p>
+      </div>
+    </section>
 
-</p>
+    <div class="divider"></div>
 
-  
+    <!-- EXPERTISE -->
+    <section class="section">
+      <p class="section-label">Areas of Expertise</p>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="skill-icon">🖥️</div>
+          <div class="skill-name">Computer Hardware &amp; Servicing</div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon">🎨</div>
+          <div class="skill-name">Multimedia &amp; Adobe Applications</div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon">🌐</div>
+          <div class="skill-name">Computer Networking</div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon">☕</div>
+          <div class="skill-name">Java Programming Language</div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon">🗄️</div>
+          <div class="skill-name">Database Management</div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon">☁️</div>
+          <div class="skill-name">System Architecture in AWS</div>
+        </div>
+      </div>
+    </section>
 
-<h> My Expertise are: </h>
-<ul>
-  <li> Computer Hardware and Servicing</li>
-  <li> Multimedia especially Adobe Applications </li>
-  <li> Computer Networking </li>
-  <li> Java Language </li>
-</ul>
+    <div class="divider"></div>
 
+    <!-- EDUCATION -->
+    <section class="section">
+      <p class="section-label">Education</p>
+      <div class="edu-timeline">
+        <div class="edu-item">
+          <div class="edu-dot"></div>
+          <div class="edu-body">
+            <span class="edu-year">2024</span>
+            <div class="edu-degree">Master of Science in Information Technology</div>
+            <div class="edu-school">Saint Louis University · Tuguegarao City</div>
+          </div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-dot edu-dot--muted"></div>
+          <div class="edu-body">
+            <span class="edu-year">2013</span>
+            <div class="edu-degree">Bachelor of Science in Information Technology</div>
+            <div class="edu-school">Western Institute of Technology</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <span class="footer-name">Joana M. Bernardino © 2025</span>
+      <span class="status-badge">Available for opportunities</span>
+    </footer>
+
+  </div>
 </body>
 </html>
-
