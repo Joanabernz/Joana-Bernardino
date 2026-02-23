@@ -28,12 +28,11 @@
       overflow-x: hidden;
     }
 
-    /* Animated mesh background */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
-      background: 
+      background:
         radial-gradient(ellipse 80% 60% at 10% 0%, rgba(124,58,237,0.18) 0%, transparent 60%),
         radial-gradient(ellipse 60% 50% at 90% 100%, rgba(0,212,255,0.12) 0%, transparent 60%);
       pointer-events: none;
@@ -48,10 +47,8 @@
       z-index: 1;
     }
 
-    /* ─── HERO ─── */
     header {
       padding: 5rem 0 3rem;
-      position: relative;
     }
 
     .tag-line {
@@ -107,29 +104,37 @@
       animation: fadeUp 0.6s 0.2s ease both;
     }
 
-    /* ─── PHOTOS STRIP ─── */
+    /* PHOTOS */
     .photos {
       display: flex;
-      gap: 1rem;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
       margin: 2.5rem 0;
       animation: fadeUp 0.6s 0.3s ease both;
     }
 
-    .photo-frame {
-      flex: 1;
-      aspect-ratio: 4/5;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      background: var(--card);
-      position: relative;
+    .photos-bottom {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
     }
 
-    .photo-frame:first-child {
-      flex: 0 0 120px;
-      aspect-ratio: 1;
+    .photo-frame {
+      width: 160px;
+      height: 160px;
       border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid var(--border);
+      background: var(--card);
+      position: relative;
+      flex-shrink: 0;
+      transition: transform 0.3s;
+    }
+
+    .photo-frame.main {
       border: 2px solid var(--accent);
+      box-shadow: 0 0 24px rgba(0,212,255,0.25);
     }
 
     .photo-frame img {
@@ -139,25 +144,26 @@
       transition: filter 0.3s, transform 0.4s;
     }
 
-    .photo-frame:hover img {
-      filter: grayscale(0%);
-      transform: scale(1.04);
-    }
+    .photo-frame:hover { transform: translateY(-4px); }
+    .photo-frame:hover img { filter: grayscale(0%); transform: scale(1.06); }
 
     .photo-label {
       position: absolute;
-      bottom: 0.5rem; left: 0.6rem;
-      font-size: 0.65rem;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.62rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.7);
-      background: rgba(0,0,0,0.5);
+      color: rgba(255,255,255,0.85);
+      background: rgba(0,0,0,0.55);
       backdrop-filter: blur(4px);
-      padding: 0.2rem 0.5rem;
+      padding: 0.2rem 0.55rem;
       border-radius: 4px;
+      white-space: nowrap;
     }
 
-    /* ─── ABOUT ─── */
+    /* ABOUT */
     .section {
       padding: 2.5rem 0;
       animation: fadeUp 0.6s 0.35s ease both;
@@ -171,15 +177,10 @@
       margin-bottom: 1rem;
     }
 
-    .about-text {
-      font-size: 1rem;
-      color: #94a3b8;
-      max-width: 660px;
-    }
-
+    .about-text { font-size: 1rem; color: #94a3b8; max-width: 660px; }
     .about-text p + p { margin-top: 0.9rem; }
 
-    /* ─── SKILLS ─── */
+    /* SKILLS */
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
@@ -209,17 +210,10 @@
       transition: transform 0.3s ease;
     }
 
-    .skill-card:hover {
-      transform: translateY(-3px);
-      border-color: rgba(0,212,255,0.25);
-    }
-
+    .skill-card:hover { transform: translateY(-3px); border-color: rgba(0,212,255,0.25); }
     .skill-card:hover::before { transform: scaleX(1); }
 
-    .skill-icon {
-      font-size: 1.6rem;
-      margin-bottom: 0.5rem;
-    }
+    .skill-icon { font-size: 1.6rem; margin-bottom: 0.5rem; }
 
     .skill-name {
       font-family: 'Syne', sans-serif;
@@ -228,11 +222,10 @@
       color: var(--text);
     }
 
-    /* ─── EDUCATION TIMELINE ─── */
+    /* EDUCATION */
     .edu-timeline {
       display: flex;
       flex-direction: column;
-      gap: 0;
       padding-left: 1rem;
       border-left: 2px solid var(--border);
       margin-top: 1.2rem;
@@ -243,7 +236,6 @@
       align-items: flex-start;
       gap: 1.2rem;
       padding-bottom: 1.8rem;
-      position: relative;
     }
 
     .edu-item:last-child { padding-bottom: 0; }
@@ -258,10 +250,7 @@
       margin-left: calc(-1rem - 7px);
     }
 
-    .edu-dot--muted {
-      background: var(--muted);
-      box-shadow: none;
-    }
+    .edu-dot--muted { background: var(--muted); box-shadow: none; }
 
     .edu-body { flex: 1; }
 
@@ -283,13 +272,9 @@
       margin-top: 0.2rem;
     }
 
-    .edu-school {
-      font-size: 0.88rem;
-      color: var(--muted);
-      margin-top: 0.1rem;
-    }
+    .edu-school { font-size: 0.88rem; color: var(--muted); margin-top: 0.1rem; }
 
-    /* ─── FOOTER ─── */
+    /* FOOTER */
     footer {
       padding: 3rem 0 2rem;
       border-top: 1px solid var(--border);
@@ -323,18 +308,12 @@
       animation: pulse 2s infinite;
     }
 
-    /* ─── ANIMATIONS ─── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* ─── DIVIDER ─── */
-    .divider {
-      height: 1px;
-      background: var(--border);
-      margin: 0.5rem 0;
-    }
+    .divider { height: 1px; background: var(--border); margin: 0.5rem 0; }
   </style>
 </head>
 <body>
@@ -346,18 +325,20 @@
       <p class="subtitle">Educator in Computer Science &amp; Information Technology · Western Institute of Technology</p>
     </header>
 
-    <!-- PHOTOS -->
+    <!-- PHOTOS: portrait on top, two class photos below -->
     <div class="photos">
-      <div class="photo-frame">
+      <div class="photo-frame main">
         <img src="2x2.jpg" alt="Joana Bernardino portrait">
       </div>
-      <div class="photo-frame">
-        <img src="f2f.jpeg" alt="Face-to-face class">
-        <span class="photo-label">F2F Class</span>
-      </div>
-      <div class="photo-frame">
-        <img src="online.JPG" alt="Online class">
-        <span class="photo-label">Online Class</span>
+      <div class="photos-bottom">
+        <div class="photo-frame">
+          <img src="f2f.jpeg" alt="Face-to-face class">
+          <span class="photo-label">F2F Class</span>
+        </div>
+        <div class="photo-frame">
+          <img src="online.JPG" alt="Online class">
+          <span class="photo-label">Online Class</span>
+        </div>
       </div>
     </div>
 
